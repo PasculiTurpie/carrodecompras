@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Automovil from "./components/Automovil";
 import {db} from './data/db'
 function App() {
+
   const data = db;
   console.log(data)
 
@@ -18,6 +19,12 @@ function App() {
       <main className="container-xl mt-5">
         <h2 className="text-center">Automóviles disponibles</h2>
         <div className="row mt-5"></div>
+        {
+          data.map((auto) => (
+            
+            <Automovil auto={auto}  />
+            ))
+        }
 
         {
           data.map((auto)=>(
