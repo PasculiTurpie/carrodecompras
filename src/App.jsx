@@ -16,7 +16,7 @@ function App() {
         {
           data.map((auto) => (
             
-            <Automovil key={auto.id} name={auto.name} image={auto.image} brand={auto.brand} price={auto.price} year={auto.year} topSpeed={auto.topSpeed }  />
+            <Automovil auto={auto}  />
             ))
         }
 
