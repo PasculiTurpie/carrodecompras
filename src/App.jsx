@@ -5,6 +5,12 @@ import {db} from './data/db'
 function App() {
   const data = db;
   console.log(data)
+
+    const handleClickAgregar =(item)=>{
+    
+    console.log('Agregar item al carro...', item)
+  }
+
   return (
     <>
       <Header />
@@ -13,7 +19,12 @@ function App() {
         <h2 className="text-center">Automóviles disponibles</h2>
         <div className="row mt-5"></div>
 
-        <Automovil />
+        {
+          data.map((auto)=>(
+            <Automovil key={auto.id} auto={auto} handleClickAgregar={handleClickAgregar}/>
+          ))
+        }
+
       </main>
 
       <footer className="mt-5 py-5">
