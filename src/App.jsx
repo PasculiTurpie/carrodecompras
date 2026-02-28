@@ -5,6 +5,12 @@ import { db } from './data/db'
 function App() {
 
   const data = db;
+  console.log(data)
+
+    const handleClickAgregar =(item)=>{
+    
+    console.log('Agregar item al carro...', item)
+  }
 
   return (
     <>
@@ -17,6 +23,12 @@ function App() {
           data.map((auto) => (
 
             <Automovil auto={auto} />
+          ))
+        }
+
+        {
+          data.map((auto)=>(
+            <Automovil key={auto.id} auto={auto} handleClickAgregar={handleClickAgregar}/>
           ))
         }
 
