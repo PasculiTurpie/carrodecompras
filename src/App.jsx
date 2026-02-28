@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
 import Automovil from "./components/Automovil";
-import {db} from './data/db'
+import { db } from './data/db'
 function App() {
 
   const data = db;
@@ -15,9 +15,9 @@ function App() {
         <div className="row mt-5"></div>
         {
           data.map((auto) => (
-            
-            <Automovil auto={auto}  />
-            ))
+
+            <Automovil auto={auto} />
+          ))
         }
 
       </main>
