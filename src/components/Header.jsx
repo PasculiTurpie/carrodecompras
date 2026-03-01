@@ -1,6 +1,14 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({cart}) => {
+
+
+
+
+const totalItem= cart.reduce((total, {quantity, price})=>{
+  return total + (quantity*price)
+},0)
+
   return (
     <header className="py-3 header">
       <div className="container-xl">
@@ -23,7 +31,12 @@ const Header = () => {
                   alt="imagen carrito"
                 />
                 <div id="carrito-content" className="carrito-content">
-                  <p className="text-center">El carrito está vacío</p>
+                  {!cart.length > 0 ? (
+                    <p className="text-center">El carrito está vacío</p>
+                  ) : (
+                    " "
+                  )}
+
                   <table className="w-100 table">
                     <thead>
                       <tr>
@@ -34,39 +47,44 @@ const Header = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td className="align-middle">
-                          <img
-                            className="img-fluid"
-                            src="./public/img/aspark owl.jpg"
-                            alt="imagen automóvil"
-                          />
-                        </td>
-                        <td className="align-middle">Nombre</td>
-                        <td className="fw-bold align-middle">$1.000.000</td>
-                        <td className="align-middle">
-                          <div className="d-flex align-items-center gap-4">
-                            <button type="button" className="btn btn-dark">
-                              -
-                            </button>
-                            1
-                            <button type="button" className="btn btn-dark">
-                              +
-                            </button>
-                          </div>
-                        </td>
-                        <td className="align-middle border-top-0">
-                          <button
-                            type="button"
-                            className="btn-close"
-                            aria-label="Close"
-                          ></button>
-                        </td>
-                      </tr>
+                      {cart.map((itemCart) => {
+                        return(
+
+                        <tr key={itemCart.id}>
+                          <td className="align-middle">
+                            <img
+                              className="img-fluid"
+                              src={`./public/img/${itemCart.image}.jpg`}
+                              alt="imagen automóvil"
+                            />
+                          </td>
+                          <td className="align-middle">{itemCart.name}</td>
+                          <td className="fw-bold align-middle">${itemCart.price.toLocaleString()}</td>
+                          <td className="align-middle">
+                            <div className="d-flex align-items-center gap-4">
+                              <button type="button" className="btn btn-dark">
+                                -
+                              </button>
+                              {itemCart.quantity}
+                              <button type="button" className="btn btn-dark">
+                                +
+                              </button>
+                            </div>
+                          </td>
+                          <td className="align-middle border-top-0">
+                            <button
+                              type="button"
+                              className="btn-close"
+                              aria-label="Close"
+                            ></button>
+                          </td>
+                        </tr>
+                        )
+                      })}
                     </tbody>
                   </table>
                   <p className="text-end">
-                    Total a pagar: <span className="fw-bold">$ 1.000.000</span>
+                    Total a pagar: <span className="fw-bold">$ {totalItem.toLocaleString()}</span>
                   </p>
                   <button className="btn btn-dark w-100 mt-3 p-2">
                     Vaciar Carrito
