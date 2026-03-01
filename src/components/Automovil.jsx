@@ -1,8 +1,6 @@
 import React from "react";
 
 const Automovil = ({auto, handleClickAgregar}) => {
-
-console.log(auto)
   
 
   return (

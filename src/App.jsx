@@ -5,7 +5,7 @@ import { db } from './data/db'
 function App() {
 
   const data = db;
-  console.log(data)
+  
 
     const handleClickAgregar =(item)=>{
     
