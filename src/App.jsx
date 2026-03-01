@@ -2,14 +2,31 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
 import Automovil from "./components/Automovil";
 import { db } from './data/db'
+import { useState } from "react";
 function App() {
+
+  const [cart, setCart] = useState([])
 
   const data = db;
   
+  const handleClickAgregar =(item)=>{
+      const itemExist = cart.findIndex(auto => auto.id === item.id)
+    console.log(itemExist)
 
-    const handleClickAgregar =(item)=>{
-    
-    console.log('Agregar item al carro...', item)
+    if (itemExist >= 0) {
+
+      const updateCart = [...cart]
+      updateCart[itemExist].quantity++
+      setCart(updateCart)
+      console.log("Ya existe")
+      console.log(cart)
+      
+    } else {
+      item.quantity=1
+      setCart([...cart, item])
+      console.log("No existe")
+      console.log(cart)
+    }
   }
 
   return (
