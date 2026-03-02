@@ -8,6 +8,13 @@ function App() {
   const [cart, setCart] = useState([])
 
   const data = db;
+
+  const eliminarItem = (id) => {
+    
+    const updateItem = cart.filter((item) => item.id !== id)
+    setCart(updateItem)
+
+  }
   
   const handleClickAgregar =(item)=>{
       const itemExist = cart.findIndex(auto => auto.id === item.id)
@@ -31,7 +38,7 @@ function App() {
 
   return (
     <>
-      <Header cart={cart}/>
+      <Header eliminarItem={eliminarItem} cart={cart}/>
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Automóviles disponibles</h2>

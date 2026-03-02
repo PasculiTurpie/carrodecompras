@@ -1,13 +1,14 @@
 import React from "react";
 
-const Header = ({cart}) => {
+const Header = ({ cart, eliminarItem }) => {
 
+  console.log(cart)
 
+  
 
-
-const totalItem= cart.reduce((total, {quantity, price})=>{
-  return total + (quantity*price)
-},0)
+  const totalItem = cart?.reduce((total, { quantity, price }) => {
+    return total + (quantity * price)
+  }, 0)
 
   return (
     <header className="py-3 header">
@@ -48,37 +49,38 @@ const totalItem= cart.reduce((total, {quantity, price})=>{
                     </thead>
                     <tbody>
                       {cart.map((itemCart) => {
-                        return(
+                        return (
 
-                        <tr key={itemCart.id}>
-                          <td className="align-middle">
-                            <img
-                              className="img-fluid"
-                              src={`./public/img/${itemCart.image}.jpg`}
-                              alt="imagen automóvil"
-                            />
-                          </td>
-                          <td className="align-middle">{itemCart.name}</td>
-                          <td className="fw-bold align-middle">${itemCart.price.toLocaleString()}</td>
-                          <td className="align-middle">
-                            <div className="d-flex align-items-center gap-4">
-                              <button type="button" className="btn btn-dark">
-                                -
-                              </button>
-                              {itemCart.quantity}
-                              <button type="button" className="btn btn-dark">
-                                +
-                              </button>
-                            </div>
-                          </td>
-                          <td className="align-middle border-top-0">
-                            <button
-                              type="button"
-                              className="btn-close"
-                              aria-label="Close"
-                            ></button>
-                          </td>
-                        </tr>
+                          <tr key={itemCart.id} className="cart-element">
+                            <td className="align-middle">
+                              <img
+                                className="img-fluid"
+                                src={`./public/img/${itemCart.image}.jpg`}
+                                alt="imagen automóvil"
+                              />
+                            </td>
+                            <td className="align-middle">{itemCart.name}</td>
+                            <td className="fw-bold align-middle">${itemCart.price.toLocaleString()}</td>
+                            <td className="align-middle">
+                              <div className="d-flex align-items-center gap-4">
+                                <button type="button" className="btn btn-dark">
+                                  -
+                                </button>
+                                {itemCart.quantity}
+                                <button type="button" className="btn btn-dark">
+                                  +
+                                </button>
+                              </div>
+                            </td>
+                            <td className="align-middle border-top-0">
+                              <button
+                                type="button"
+                                className="btn-close"
+                                aria-label="Close"
+                                onClick={()=>eliminarItem(itemCart.id)}
+                              ></button>
+                            </td>
+                          </tr>
                         )
                       })}
                     </tbody>
@@ -86,9 +88,13 @@ const totalItem= cart.reduce((total, {quantity, price})=>{
                   <p className="text-end">
                     Total a pagar: <span className="fw-bold">$ {totalItem.toLocaleString()}</span>
                   </p>
-                  <button className="btn btn-dark w-100 mt-3 p-2">
-                    Vaciar Carrito
-                  </button>
+                  {
+                    !cart.length > 0 ? (<button className="btn btn-dark w-100 mt-3 p-2" disabled >
+                      Vaciar Carrito
+                    </button>) : (<button className="btn btn-dark w-100 mt-3 p-2" >
+                      Vaciar Carrito
+                    </button> )
+                  }
                 </div>
               </div>
             </div>
